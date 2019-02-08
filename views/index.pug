@@ -1,0 +1,23 @@
+extends layout
+
+block content
+  
+    div#app( v-if="isVueWorking" v-cloak )
+      h1= title
+      
+      div(v-if="!submitted")
+        p This is just another project messing around with APIs. This uses data available from #[a(href="https://uk-air.defra.gov.uk" target="_blank") https://uk-air.defra.gov.uk]
+        button( @click="doSomething" ) Get Data
+        
+      div(v-if="loading")
+        p Loading...
+      
+      div(v-if="submitted" v-cloak)
+        p There were 2309 air quality testing stations available from this API and unfortunately this API only provides their name and co-ordinates.
+        p I have limited this to 100 results.
+        ul(v-for="dataset in all")
+          li  {{dataset[0]}}
+            ul
+              li X: {{dataset[1]}}, Y: {{dataset[2]}}
+        br
+        p #[strong Next steps for this could be to populate a map with markers using the co-ordinates].
